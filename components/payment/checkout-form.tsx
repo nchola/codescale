@@ -32,10 +32,10 @@ export function CheckoutForm({ amount, projectType, items }: any) {
     setLoading(true)
 
     try {
-      // Generar un ID de orden único
+      // Generate unique order ID
       const orderId = generateOrderId()
 
-      // Preparar los datos para la API de pago
+      // Prepare payment data
       const paymentData = {
         orderId,
         amount,
@@ -56,7 +56,7 @@ export function CheckoutForm({ amount, projectType, items }: any) {
         paymentType,
       }
 
-      // Configuración específica según el método de pago
+      // Payment method specific configuration
       let paymentOptions = {}
 
       if (paymentMethod === "credit_card") {
@@ -77,7 +77,7 @@ export function CheckoutForm({ amount, projectType, items }: any) {
         }
       }
 
-      // Enviar solicitud a la API
+      // Send request to API
       const response = await fetch("/api/payment", {
         method: "POST",
         headers: {
@@ -93,33 +93,32 @@ export function CheckoutForm({ amount, projectType, items }: any) {
       const data = await response.json()
 
       if (data.success) {
-        // Si es tarjeta de crédito, redirigir a la página de pago de Midtrans
+        // For credit card, redirect to payment page
         if (paymentMethod === "credit_card" && data.transaction.redirect_url) {
           window.location.href = data.transaction.redirect_url
         }
-        // Si es gopay, mostrar el QR code
+        // For gopay, show QR code
         else if (paymentMethod === "gopay" && data.transaction.actions) {
           const deepLinkUrl = data.transaction.actions.find((action: any) => action.name === "deeplink-redirect")?.url
           if (deepLinkUrl) {
             window.location.href = deepLinkUrl
           }
         }
-        // Para otros métodos, redirigir a la página de estado
+        // For other methods, redirect to status page
         else {
           router.push(`/payment/status?order_id=${orderId}`)
         }
       } else {
-        alert("Error al procesar el pago: " + data.message)
+        alert("Gagal memproses pembayaran: " + data.message)
       }
     } catch (error) {
-      console.error("Error al procesar el pago:", error)
-      alert("Error al procesar el pago. Por favor, inténtalo de nuevo.")
+      console.error("Error processing payment:", error)
+      alert("Gagal memproses pembayaran. Silakan coba lagi.")
     } finally {
       setLoading(false)
     }
   }
 
-  // Función para determinar el tipo de pago según el método seleccionado
   const getPaymentType = () => {
     switch (paymentMethod) {
       case "credit_card":
@@ -138,15 +137,15 @@ export function CheckoutForm({ amount, projectType, items }: any) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Checkout</CardTitle>
-        <CardDescription>Complete sus datos para procesar el pago</CardDescription>
+        <CardTitle>Pembayaran</CardTitle>
+        <CardDescription>Lengkapi data Anda untuk memproses pembayaran</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-4">
             <div className="grid grid-cols-1 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Nombre completo</Label>
+                <Label htmlFor="name">Nama Lengkap</Label>
                 <Input id="name" name="name" value={formData.name} onChange={handleInputChange} required />
               </div>
 
@@ -163,18 +162,18 @@ export function CheckoutForm({ amount, projectType, items }: any) {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="phone">Teléfono</Label>
+                <Label htmlFor="phone">Nomor Telepon</Label>
                 <Input id="phone" name="phone" value={formData.phone} onChange={handleInputChange} required />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="address">Dirección</Label>
+                <Label htmlFor="address">Alamat</Label>
                 <Input id="address" name="address" value={formData.address} onChange={handleInputChange} required />
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label>Método de pago</Label>
+              <Label>Metode Pembayaran</Label>
               <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod} className="grid grid-cols-3 gap-4">
                 <div>
                   <RadioGroupItem value="credit_card" id="credit_card" className="peer sr-only" />
@@ -182,7 +181,7 @@ export function CheckoutForm({ amount, projectType, items }: any) {
                     htmlFor="credit_card"
                     className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                   >
-                    Tarjeta de Crédito
+                    Kartu Kredit
                   </Label>
                 </div>
                 <div>
@@ -191,7 +190,7 @@ export function CheckoutForm({ amount, projectType, items }: any) {
                     htmlFor="bank_transfer"
                     className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                   >
-                    Transferencia Bancaria
+                    Transfer Bank
                   </Label>
                 </div>
                 <div>
@@ -212,17 +211,16 @@ export function CheckoutForm({ amount, projectType, items }: any) {
                 <span>Rp {amount.toLocaleString("id-ID")}</span>
               </div>
               <p className="text-sm text-muted-foreground mt-1">
-                {projectType} - {items.length} item(s)
+                {projectType} - {items.length} item
               </p>
             </div>
           </div>
 
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Procesando..." : "Pagar ahora"}
+            {loading ? "Memproses..." : "Bayar Sekarang"}
           </Button>
         </form>
       </CardContent>
     </Card>
   )
 }
-
