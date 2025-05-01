@@ -1,113 +1,167 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { CheckoutForm } from "@/components/payment/checkout-form"
-import { PaymentMethods } from "@/components/payment/payment-methods"
-import { Skeleton } from "@/components/ui/skeleton"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { SnapPayment } from "@/components/payment/snap-payment"
 
 export default function CheckoutPage() {
-  const [checkoutData, setCheckoutData] = useState<any>(null)
-  const [loading, setLoading] = useState(true)
+  const router = useRouter()
+  const [paymentToken, setPaymentToken] = useState<string | null>(null)
+  const [isProcessing, setIsProcessing] = useState(false)
 
-  useEffect(() => {
-    // Ambil data checkout dari localStorage
-    const storedData = localStorage.getItem("checkoutData")
+  const handlePayment = async (formData: FormData) => {
+    try {
+      setIsProcessing(true)
 
-    if (storedData) {
-      try {
-        const parsedData = JSON.parse(storedData)
-        setCheckoutData(parsedData)
-      } catch (error) {
-        console.error("Error parsing checkout data:", error)
-      }
-    } else {
-      // Data default jika tidak ada di localStorage
-      setCheckoutData({
-        amount: 5000000, // Rp 5.000.000
-        projectType: "SaaS Development",
-        items: [
-          {
-            id: "saas-dev",
-            name: "SaaS Development - Basic Package",
-            price: 4500000,
-            quantity: 1,
+      const response = await fetch("/api/payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          orderId: `ORDER-${Date.now()}`,
+          amount: formData.get("amount"),
+          customerDetails: {
+            name: formData.get("name"),
+            email: formData.get("email"),
+            phone: formData.get("phone"),
+            address: formData.get("address"),
           },
-          {
-            id: "support",
-            name: "3 Months Support",
-            price: 500000,
-            quantity: 1,
-          },
-        ],
+          itemDetails: [
+            {
+              id: "ITEM-1",
+              price: formData.get("amount"),
+              quantity: 1,
+              name: "Landing Page",
+            },
+          ],
+        }),
       })
+
+      const data = await response.json()
+
+      if (!data.success) {
+        throw new Error(data.message || "Payment failed")
+      }
+
+      setPaymentToken(data.token)
+    } catch (error) {
+      console.error("Payment error:", error)
+      alert("Pembayaran gagal: " + (error as Error).message)
+    } finally {
+      setIsProcessing(false)
     }
+  }
 
-    setLoading(false)
-  }, [])
+  const handlePaymentSuccess = (result: any) => {
+    alert("Pembayaran berhasil!")
+    router.push("/dashboard")
+  }
 
-  if (loading) {
-    return (
-      <main className="py-20 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <h1 className="text-3xl font-bold mb-8 text-center">Checkout</h1>
+  const handlePaymentPending = (result: any) => {
+    alert("Pembayaran dalam proses. Silakan selesaikan pembayaran sesuai instruksi.")
+  }
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <Skeleton className="h-[600px] w-full rounded-lg" />
-            </div>
-            <div className="space-y-8">
-              <Skeleton className="h-[300px] w-full rounded-lg" />
-              <Skeleton className="h-[200px] w-full rounded-lg" />
-            </div>
-          </div>
-        </div>
-      </main>
-    )
+  const handlePaymentError = (result: any) => {
+    alert("Pembayaran gagal: " + result.message)
+  }
+
+  const handlePaymentClose = () => {
+    setPaymentToken(null)
   }
 
   return (
-    <main className="py-20 px-4">
-      <div className="container mx-auto max-w-6xl">
-        <h1 className="text-3xl font-bold mb-8 text-center">Checkout</h1>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            {checkoutData && (
-              <CheckoutForm
-                amount={checkoutData.amount}
-                projectType={checkoutData.projectType}
-                items={checkoutData.items}
-              />
-            )}
-          </div>
-
-          <div className="space-y-8">
-            <PaymentMethods />
-
-            <div className="bg-muted/30 p-6 rounded-lg">
-              <h3 className="text-lg font-medium mb-4">Informasi Pembayaran</h3>
-              <div className="space-y-4 text-sm">
-                <p>
-                  <strong>Deposit Awal (30%):</strong> Pembayaran awal sebesar 30% dari total nilai proyek untuk memulai
-                  pengembangan.
-                </p>
-                <p>
-                  <strong>Milestone Payment:</strong> Pembayaran berikutnya berdasarkan pencapaian milestone yang telah
-                  disepakati.
-                </p>
-                <p>
-                  <strong>Final Payment:</strong> Pelunasan setelah proyek selesai dan sebelum deployment ke production.
-                </p>
-                <p>
-                  <strong>Keamanan:</strong> Semua transaksi diproses dengan enkripsi SSL dan menggunakan gateway
-                  pembayaran yang aman.
-                </p>
-              </div>
-            </div>
-          </div>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-2xl font-bold mb-6">Checkout</h1>
+      
+      <form onSubmit={(e) => {
+        e.preventDefault()
+        handlePayment(new FormData(e.currentTarget))
+      }} className="space-y-4 max-w-md">
+        <div>
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            Nama Lengkap
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+          />
         </div>
-      </div>
-    </main>
+
+        <div>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+            Nomor Telepon
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            required
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+            Alamat
+          </label>
+          <textarea
+            id="address"
+            name="address"
+            rows={3}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="amount" className="block text-sm font-medium text-gray-700">
+            Jumlah Pembayaran
+          </label>
+          <input
+            type="number"
+            id="amount"
+            name="amount"
+            required
+            min="1000"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={isProcessing}
+          className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:bg-blue-300"
+        >
+          {isProcessing ? "Memproses..." : "Bayar Sekarang"}
+        </button>
+      </form>
+
+      {paymentToken && (
+        <SnapPayment
+          token={paymentToken}
+          onSuccess={handlePaymentSuccess}
+          onPending={handlePaymentPending}
+          onError={handlePaymentError}
+          onClose={handlePaymentClose}
+        />
+      )}
+    </div>
   )
 }
 
