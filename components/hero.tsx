@@ -40,45 +40,37 @@ export function Hero() {
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-block mb-4 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 text-primary text-sm font-medium">
-            Transform Ide ke Aplikasi Web dalam 72 Jam
+            Ubah ide Anda menjadi aplikasi web berkinerja tinggi dalam 72 jam. Solusi SaaS & Web kustom dengan presisi berbasis AI.
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent animate-gradient-x">
-            From Code to Scale: Your Digital Partner
+            Solusi SaaS & Web Development <span className="text-primary">Profesional</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Bespoke SaaS & Web Solutions with AI-Powered Precision. We deliver modern designs, clean code, and tested
-            performance for your business.
+            Ubah ide Anda menjadi aplikasi web berkinerja tinggi dalam 72 jam. Solusi SaaS & Web kustom dengan presisi berbasis AI.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="group">
-              Start Project <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
-            <Button size="lg" variant="outline">
-              See Pricing
-            </Button>
-          </div>
+          
         </div>
 
         <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="glassmorphism rounded-xl p-6 gradient-border">
             <Code className="h-10 w-10 text-primary mb-4" />
-            <h3 className="text-xl font-bold font-heading mb-2">Modern Design</h3>
+            <h3 className="text-xl font-bold font-heading mb-2">Desain Modern</h3>
             <p className="text-muted-foreground">
-              Sleek interfaces with the latest UI/UX trends for maximum engagement and conversion.
+              Antarmuka elegan mengikuti tren UI/UX terbaru untuk engagement dan konversi maksimal.
             </p>
           </div>
           <div className="glassmorphism rounded-xl p-6 gradient-border">
             <Layers className="h-10 w-10 text-secondary mb-4" />
-            <h3 className="text-xl font-bold font-heading mb-2">Clean Code</h3>
+            <h3 className="text-xl font-bold font-heading mb-2">Kode Bersih</h3>
             <p className="text-muted-foreground">
-              Maintainable, scalable architecture following best practices and industry standards.
+              Arsitektur mudah dirawat dan scalable, mengikuti praktik terbaik industri.
             </p>
           </div>
           <div className="glassmorphism rounded-xl p-6 gradient-border">
             <Database className="h-10 w-10 text-accent mb-4" />
-            <h3 className="text-xl font-bold font-heading mb-2">Tested Performance</h3>
+            <h3 className="text-xl font-bold font-heading mb-2">Performa Teruji</h3>
             <p className="text-muted-foreground">
-              Optimized for speed with sub-second load times and smooth user experiences.
+              Optimasi kecepatan dengan waktu muat di bawah satu detik dan pengalaman pengguna yang mulus.
             </p>
           </div>
         </div>

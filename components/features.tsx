@@ -5,33 +5,33 @@ export function Features() {
   const features = [
     {
       icon: Zap,
-      title: "Zero-Bundle Strategy",
-      description: "SSG with Next.js, partial hydration, and code splitting for lightning-fast load times.",
+      title: "Strategi Tanpa Bundle",
+      description: "SSG dengan Next.js, partial hydration, dan code splitting untuk waktu muat super cepat.",
     },
     {
       icon: Shield,
-      title: "Enterprise Security",
-      description: "SSL/TLS 1.3, strict CSP headers, and CORS policies to protect your data.",
+      title: "Keamanan Perusahaan",
+      description: "SSL/TLS 1.3, header CSP ketat, dan kebijakan CORS untuk melindungi data Anda.",
     },
     {
       icon: Cpu,
-      title: "Edge Functions",
-      description: "Deploy globally with Vercel Edge Functions for minimal latency worldwide.",
+      title: "Fungsi Edge",
+      description: "Deploy global dengan Vercel Edge Functions untuk latensi minimal di seluruh dunia.",
     },
     {
       icon: BarChart,
-      title: "Performance Targets",
-      description: "Optimized for Core Web Vitals with LCP <1.2s, TBT <200ms, and zero CLS.",
+      title: "Target Performa",
+      description: "Optimasi untuk Core Web Vitals dengan LCP <1.2s, TBT <200ms, dan nol CLS.",
     },
     {
       icon: Layers,
-      title: "Media Optimization",
-      description: "WebP/AVIF formats with responsive images and lazy loading for optimal delivery.",
+      title: "Optimasi Media",
+      description: "Format WebP/AVIF dengan gambar responsif dan lazy loading untuk pengiriman optimal.",
     },
     {
       icon: Check,
-      title: "Accessibility",
-      description: "WCAG 2.1 AA compliant with keyboard navigation and proper contrast ratios.",
+      title: "Aksesibilitas",
+      description: "Standar WCAG 2.1 AA dengan navigasi keyboard dan rasio kontras yang tepat.",
     },
   ]
 
@@ -39,9 +39,9 @@ export function Features() {
     <section id="services" className="py-20">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4">Technical Excellence</h2>
+          <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4">Keunggulan Teknis</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Our development approach focuses on performance, security, and maintainability.
+            Pendekatan pengembangan kami berfokus pada performa, keamanan, dan kemudahan pemeliharaan.
           </p>
         </div>
 

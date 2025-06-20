@@ -2,10 +2,17 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/mode-toggle"
+import GooeyNav from "@/components/ui/GooeyNav"
 import { Menu, X, Code, ChevronDown } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+
+const navItems = [
+  { label: "Services", href: "#services" },
+  { label: "Solutions", href: "#solutions" },
+  { label: "Showcase", href: "#showcase" },
+  { label: "Contact", href: "#contact" },
+];
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -29,52 +36,23 @@ export function Navbar() {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <Code className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold font-heading">CodeScale</span>
+            <span className="text-xl font-bold font-heading">AppWebJoki</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="#services" className="text-sm font-medium hover:text-primary transition-colors">
-              Services
-            </Link>
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium hover:text-primary transition-colors">
-                Solutions <ChevronDown className="h-4 w-4" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem>
-                  <Link href="#saas" className="w-full">
-                    SaaS Development
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="#landing" className="w-full">
-                    Landing Pages
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="#portfolio" className="w-full">
-                    Portfolio Sites
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <Link href="#showcase" className="text-sm font-medium hover:text-primary transition-colors">
-              Showcase
-            </Link>
-            <Link href="#pricing" className="text-sm font-medium hover:text-primary transition-colors">
-              Pricing
-            </Link>
-            <Link href="#contact" className="text-sm font-medium hover:text-primary transition-colors">
-              Contact
-            </Link>
-          </nav>
-
-          <div className="flex items-center gap-4">
-            <ModeToggle />
-            <Button className="hidden md:flex">Start Project →</Button>
-            <button className="md:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {/* GooeyNav Desktop */}
+          <div className="hidden md:flex items-center gap-6">
+            <GooeyNav
+              items={navItems}
+              particleCount={15}
+              particleDistances={[90, 10]}
+              particleR={100}
+              initialActiveIndex={0}
+              animationTime={600}
+              timeVariance={300}
+              colors={[1, 2, 3, 1, 2, 3, 1, 4]}
+            />
+            <button>
+              <ModeToggle />
             </button>
           </div>
         </div>
@@ -119,13 +97,7 @@ export function Navbar() {
             >
               Showcase
             </Link>
-            <Link
-              href="#pricing"
-              className="text-sm font-medium hover:text-primary transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Pricing
-            </Link>
+            
             <Link
               href="#contact"
               className="text-sm font-medium hover:text-primary transition-colors"
@@ -133,9 +105,7 @@ export function Navbar() {
             >
               Contact
             </Link>
-            <Button className="mt-2" onClick={() => setIsMobileMenuOpen(false)}>
-              Start Project →
-            </Button>
+            
           </nav>
         </div>
       )}

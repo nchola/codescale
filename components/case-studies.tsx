@@ -7,28 +7,28 @@ import Link from "next/link"
 export function CaseStudies() {
   const caseStudies = [
     {
-      title: "SaaS Dashboard Redesign",
+      title: "Redesain Dashboard SaaS",
       client: "AnalyticsPro",
-      description: "How we improved user engagement by 300% with a complete UX overhaul and performance optimization.",
-      tags: ["UX Design", "Performance", "React"],
+      description: "Bagaimana kami meningkatkan engagement pengguna hingga 300% dengan perombakan UX total dan optimasi performa.",
+      tags: ["Desain UX", "Performa", "React"],
       pdfUrl: "#",
       videoUrl: "#",
     },
     {
-      title: "E-Commerce Conversion Boost",
+      title: "Peningkatan Konversi E-Commerce",
       client: "FashionBrand",
       description:
-        "Implementing WebGL product visualization that increased conversion rates by 150% and reduced returns.",
+        "Implementasi visualisasi produk WebGL yang meningkatkan konversi 150% dan menurunkan retur.",
       tags: ["WebGL", "Next.js", "Shopify"],
       pdfUrl: "#",
       videoUrl: "#",
     },
     {
-      title: "Fintech App Security Enhancement",
+      title: "Peningkatan Keamanan Aplikasi Fintech",
       client: "SecurePay",
       description:
-        "Strengthening security protocols while maintaining a seamless user experience for a payment platform.",
-      tags: ["Security", "Authentication", "API"],
+        "Memperkuat protokol keamanan tanpa mengorbankan pengalaman pengguna untuk platform pembayaran.",
+      tags: ["Keamanan", "Autentikasi", "API"],
       pdfUrl: "#",
       videoUrl: "#",
     },
@@ -38,9 +38,9 @@ export function CaseStudies() {
     <section className="py-20">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4">Case Studies</h2>
+          <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4">Studi Kasus</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Dive deeper into our success stories and learn how we solve complex challenges.
+            Pelajari lebih dalam kisah sukses kami dan bagaimana kami menyelesaikan tantangan kompleks.
           </p>
         </div>
 
@@ -48,7 +48,7 @@ export function CaseStudies() {
           {caseStudies.map((study, index) => (
             <Card key={index} className="border border-border/50 bg-card/50 backdrop-blur-sm">
               <CardHeader>
-                <div className="text-sm text-muted-foreground mb-1">Client: {study.client}</div>
+                <div className="text-sm text-muted-foreground mb-1">Klien: {study.client}</div>
                 <CardTitle className="text-xl font-heading">{study.title}</CardTitle>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {study.tags.map((tag) => (
@@ -63,10 +63,10 @@ export function CaseStudies() {
               </CardContent>
               <CardFooter className="flex justify-between">
                 <Button variant="outline" size="sm" className="gap-1">
-                  <Download className="h-4 w-4" /> PDF
+                  <Download className="h-4 w-4" /> Unduh PDF
                 </Button>
                 <Button variant="outline" size="sm" className="gap-1">
-                  <Play className="h-4 w-4" /> Video
+                  <Play className="h-4 w-4" /> Tonton Video
                 </Button>
               </CardFooter>
             </Card>

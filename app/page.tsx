@@ -1,8 +1,8 @@
 import { Navbar } from "@/components/navbar"
 import { Hero } from "@/components/hero"
 import { Showcase } from "@/components/showcase"
+import Stats from "@/components/stats"
 import { Features } from "@/components/features"
-import { PricingCalculator } from "@/components/pricing-calculator"
 import { CaseStudies } from "@/components/case-studies"
 import { TrustBadges } from "@/components/trust-badges"
 import { Footer } from "@/components/footer"
@@ -13,8 +13,8 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Showcase />
+      <Stats />
       <Features />
-      <PricingCalculator />
       <CaseStudies />
       <TrustBadges />
       <Footer />

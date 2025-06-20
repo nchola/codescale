@@ -1,17 +1,17 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Code, Mail, MapPin, Phone } from "lucide-react"
+import { Code, Mail, MapPin, Phone, Instagram } from "lucide-react"
 
 export function Footer() {
   return (
     <footer className="bg-dark text-white">
       <div className="container mx-auto px-4 md:px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-16 lg:gap-24 mb-8">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <Code className="h-8 w-8 text-primary" />
-              <span className="text-xl font-bold font-heading">CodeScale</span>
+              <span className="text-xl font-bold font-heading">AppWebJoki</span>
             </Link>
             <p className="text-gray-400 mb-4">
               Transforming ideas into high-performance web applications with modern design and clean code.
@@ -81,34 +81,28 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-4">Contact</h3>
             <ul className="space-y-3">
-              <li className="flex items-start gap-3">
-                <MapPin className="h-5 w-5 text-primary mt-0.5" />
-                <span className="text-gray-400">123 Tech Street, Digital City, 10001</span>
-              </li>
+              
               <li className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-primary" />
-                <span className="text-gray-400">+1 (555) 123-4567</span>
+                <span className="text-gray-400">085382581084</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-primary" />
-                <span className="text-gray-400">info@codescale.com</span>
+                <span className="text-gray-400">appwebjoki@gmail.com</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Instagram className="h-5 w-5 text-primary" />
+                <span className="text-gray-400">appwebjoki</span>
               </li>
             </ul>
           </div>
 
-          <div>
-            <h3 className="text-lg font-bold mb-4">Newsletter</h3>
-            <p className="text-gray-400 mb-4">Subscribe to our newsletter for the latest updates and insights.</p>
-            <div className="flex gap-2">
-              <Input type="email" placeholder="Your email" className="bg-slate-800 border-slate-700" />
-              <Button>Subscribe</Button>
-            </div>
-          </div>
+          
         </div>
 
-        <div className="border-t border-slate-800 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">© {new Date().getFullYear()} CodeScale. All rights reserved.</p>
-          <div className="flex gap-4 mt-4 md:mt-0">
+        <div className="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0">
+          <p className="text-gray-400 text-sm">© {new Date().getFullYear()} AppWebJoki. All rights reserved.</p>
+          <div className="flex gap-6 mt-4 md:mt-0">
             <Link href="#" className="text-gray-400 hover:text-primary text-sm">
               Privacy Policy
             </Link>

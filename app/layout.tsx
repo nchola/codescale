@@ -15,11 +15,11 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: "CodeScale | SaaS & Web Development Services",
+  title: "CodeScale | Layanan Pengembangan SaaS & Web",
   description:
-    "Transform your ideas into high-performance web applications in 72 hours. Bespoke SaaS & Web Solutions with AI-Powered Precision.",
-  keywords: ["SaaS development", "web development", "landing page", "portfolio", "Next.js", "React"],
-    generator: 'v0.dev'
+    "Ubah ide Anda menjadi aplikasi web berkinerja tinggi dalam 72 jam. Solusi SaaS & Web kustom dengan presisi berbasis AI.",
+  keywords: ["pengembangan SaaS", "pengembangan web", "landing page", "portofolio", "Next.js", "React"],
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({
